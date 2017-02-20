@@ -254,25 +254,25 @@ declare namespace cropperjs {
         /**
         * the rotated degrees of the image
         */
-        rotate: number;
+        rotate?: number;
         /**
         * the scaling factor to apply on the abscissa of the image
         */
-        scaleX: number;
+        scaleX?: number;
         /**
         * the scaling factor to apply on the ordinate of the image
         */
-        scaleY: number;
+        scaleY?: number;
     }
     interface ContainerData {
         /**
         * The current width of the container
         */
-        width: number;
+        width?: number;
         /**
         * The current height of the container
         */
-        height: number;
+        height?: number;
     }
     interface CropBoxData {
         /**
@@ -309,50 +309,56 @@ declare namespace cropperjs {
         * new height of the canvas
         */
         height: number;
-        naturalWidth: number;   // UNDOC
-        naturalHeight: number;  // UNDOC
+        /**
+        * the natural width of the canvas (read only)
+        */
+        naturalWidth?: number;
+        /**
+        * the natural height of the canvas (read only)
+        */
+        naturalHeight?: number;
     }
     interface ImageData {
         /**
         * the offset left of the image
         */
-        left: number;
+        left?: number;
         /**
         * the offset top of the image
         */
-        top: number;
+        top?: number;
         /**
         * the width of the image
         */
-        width: number;
+        width?: number;
         /**
         * the height of the image
         */
-        height: number;
+        height?: number;
         /**
         * the natural width of the image
         */
-        naturalWidth: number;
+        naturalWidth?: number;
         /**
         * the natural height of the image
         */
-        naturalHeight: number;
+        naturalHeight?: number;
         /**
         * the aspect ratio of the image
         */
-        aspectRatio: number;
+        aspectRatio?: number;
         /**
         * the rotated degrees of the image if rotated
         */
-        rotate: number;
+        rotate?: number;
         /**
         * the scaling factor to apply on the abscissa of the image if scaled
         */
-        scaleX: number;
+        scaleX?: number;
         /**
         * the scaling factor to apply on the ordinate of the image if scaled
         */
-        scaleY: number;
+        scaleY?: number;
     }
     interface CroppedCanvasOptions {
         /**
@@ -477,7 +483,7 @@ declare class cropperjs {
     /**
     * Change the cropped area position and size with new data (base on the original image).
     */
-    setData(data: cropperjs.Data): Cropper;
+    setData(data: cropperjs.Data | { (element: HTMLImageElement | HTMLCanvasElement): cropperjs.Data }): Cropper;
 
     /**
     * Output the container size data.
@@ -492,21 +498,12 @@ declare class cropperjs {
     /**
     * Output the canvas (image wrapper) position and size data.
     */
-    getCanvasData(): cropperjs.CanvasData & {
-        /**
-        * the natural width of the canvas (read only)
-        */
-        naturalWidth: number;
-        /**
-        * the natural height of the canvas (read only)
-        */
-        naturalHeight: number;
-    };
+    getCanvasData(): cropperjs.CanvasData;
 
     /**
     * Change the canvas (image wrapper) position and size with new data.
     */
-    setCanvasData(data: cropperjs.CanvasData): Cropper;
+    setCanvasData(data: cropperjs.CanvasData | { (element: HTMLImageElement | HTMLCanvasElement): cropperjs.CanvasData }): Cropper;
 
     /**
     * Output the crop box position and size data.
@@ -516,7 +513,7 @@ declare class cropperjs {
     /**
     * Change the crop box position and size with new data.
     */
-    setCropBoxData(data: cropperjs.CropBoxData): Cropper;
+    setCropBoxData(data: cropperjs.CropBoxData | { (element: HTMLImageElement | HTMLCanvasElement): cropperjs.CropBoxData }): Cropper;
 
     /**
     * Get a canvas drawn the cropped image. If it is not cropped, then returns the whole canvas.
